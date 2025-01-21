@@ -1,28 +1,29 @@
 {
-  "name": "stx-helper",
-  "module": "index.ts",
-  "type": "module",
-  "scripts": {
-    "clean": "rm -rf dist",
-    "tsc": "tsc",
-    "build-esm": "bun build ./index.ts --outdir ./dist --format esm --outfile index.mjs",
-    "build-cjs": "bun build ./index.ts --outdir ./dist --format cjs --outfile index.cjs",
-    "compile": "bun clean && bun build-esm && bun tsc"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./types": "./dist/index.d.ts",
-    "./package.json": "./package.json"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "next": "^15.1.5"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0",
-    "next": "^14.0.0"
-  }
+	"name": "stx-helper",
+	"module": "index.ts",
+	"type": "module",
+	"scripts": {
+		"clean": "rm -rf dist",
+		"tsc": "tsc",
+		"build-esm": "bun build ./index.ts --outdir ./dist --format esm --outfile index.mjs",
+		"build-cjs": "bun build ./index.ts --outdir ./dist --format cjs --outfile index.cjs",
+		"compile": "bun clean && bun build-esm && bun tsc"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./types": "./dist/index.d.ts",
+		"./package.json": "./package.json"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/bun": "latest",
+		"next": "^15.1.5"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0",
+		"next": "^14.0.0"
+	}
 }
