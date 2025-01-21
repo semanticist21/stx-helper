@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "build-esm": "bun build ./index.ts --outdir ./dist --format esm --outfile index.mjs",
     "build-cjs": "bun build ./index.ts --outdir ./dist --format cjs --outfile index.cjs",
-    "compile" : "bun clean && bun build-esm && bun tsc"
+    "compile": "bun clean && bun build-esm && bun tsc"
   },
   "exports": {
     ".": {
@@ -18,9 +18,11 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "next": "^15.1.5"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "next": "^14.0.0"
   }
 }
