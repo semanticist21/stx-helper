@@ -1,15 +1,18 @@
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 export function useStx() {
-	const searchParams = useSearchParams();
-	const router = useRouter();
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-	const add = (params: Record<string, unknown>) => {};
+  const stx = {};
 
-	const remove = (params: Record<string, unknown>) => {};
+  const setStx = {
+    add: () => {},
+    remove: () => {},
+    get: () => {},
+  };
 
-	const get = (params: Record<string, unknown>) => {};
-
-	return [searchParams, { add, remove, get }];
+  return [stx, setStx];
 }
