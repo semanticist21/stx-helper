@@ -1,35 +1,39 @@
-import {usePathname, useSearchParams} from "next/navigation";
-import {useRouter} from "next/router";
-import queryString from 'query-string';
+import qs from "query-string";
+import { useEffect, useState } from "react";
 
-export function useStx() {
-	const searchParams = useSearchParams();
-	const pathname = usePathname();
+type SearchParam<T> = Record<string, T>;
 
-	const router = useRouter();
+export function useStx<T = unknown>() {
+  const [search, setSearch] = useState<SearchParam<T>>({});
 
-	const ctx = {
-		href: (url?: string, options? : {
-			query: queryString.StringifyOptions
-		}) => {
-			const _url = url ?? pathname;
-			const params = Object.fromEntries(searchParams.entries());
+  useEffect(() => {
+    const searchParams = qs.parse(window.location.search);
+    setSearch(searchParams as SearchParam<T>);
+  }, []);
 
-			return `${_url}?${queryString.stringify(params)}`;
-		},
-		push: (url?: string) => {
-			const _url = url ?? pathname;
-			const params = Object.fromEntries(searchParams.entries());
+  return {
+    helper: {
+      add: (record: Record<string, boolean>) => {
+        const newParams = Object.assign({ ...search }, record);
+        setSearch(newParams);
+      },
+      remove: (...keys: string[]) => {
+        const newParams = { ...search };
 
-			router.push(_url);
-		},
-		record: () => {},
-	};
+        for (const key of keys) {
+          delete newParams[key];
+        }
 
-	const setCtx = {
-		add: (searchParams: Record<string, unknown>) => {},
-		remove: (searchParams: Record<string, unknown>) => {},
-	};
+        setSearch(newParams);
+      },
+    },
 
-	return [ctx, setCtx];
+    stx: {
+      link: (url?: string, options?: qs.StringifyOptions) => {
+        const _url = url ?? window.location.pathname;
+
+        return `${_url}?${qs.stringify(search, options)}`;
+      },
+    },
+  };
 }
