@@ -46,6 +46,12 @@ export function useStx(qsOptions?: qs.StringifyOptions) {
           `${pathname}?${qs.stringify(search, qsOptions)}`,
         );
       },
+      clear: () => {
+        setSearch({});
+
+        const pathname = window.location.pathname;
+        window.location.replace(pathname);
+      },
     },
 
     stx: {
@@ -54,7 +60,7 @@ export function useStx(qsOptions?: qs.StringifyOptions) {
 
         return `${_url}?${qs.stringify(search, qsOptions)}`;
       },
-      params: () => search,
+      params: search,
     },
   };
 }
