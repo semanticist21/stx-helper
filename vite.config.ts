@@ -1,4 +1,4 @@
-// vite.config.ts
+/// <reference types="vitest" />
 import {defineConfig} from "vite";
 
 import typescript from "@rollup/plugin-typescript";
@@ -10,6 +10,7 @@ const __dirname = path.resolve();
 export default defineConfig({
 	plugins: [typescript()],
 	resolve: {},
+	test: {},
 	build: {
 		manifest: true,
 		minify: false,
