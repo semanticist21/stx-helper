@@ -10,7 +10,14 @@ const __dirname = path.resolve();
 export default defineConfig({
 	plugins: [typescript()],
 	resolve: {},
-	test: {},
+	test: {
+		environment: "happy-dom",
+		include: ["src/**/*.test.ts"],
+		coverage: {
+			provider: "v8",
+			reporter: ["text", "html"],
+		},
+	},
 	build: {
 		manifest: true,
 		minify: false,
@@ -25,11 +32,13 @@ export default defineConfig({
 			plugins: [
 				typescriptPaths({
 					preserveExtensions: true,
+					tsConfigPath: path.resolve(__dirname, "tsconfig.node.json"),
 				}),
 				typescript({
 					sourceMap: true,
 					declaration: true,
 					outDir: "dist",
+					tsconfig: path.resolve(__dirname, "tsconfig.node.json"),
 				}),
 			],
 		},
